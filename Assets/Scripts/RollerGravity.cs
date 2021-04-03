@@ -7,9 +7,13 @@ public class RollerGravity : MonoBehaviour
     enum GravityDirection { Down, Up };
     GravityDirection gravityDirection;
 
+    private Rigidbody2D rb;
+
     // Start is called before the first frame update
     void Start()
     {
+        rb = this.GetComponent<Rigidbody2D>();
+        rb.gravityScale = -1;
         gravityDirection = GravityDirection.Down;
     }
 
@@ -18,7 +22,8 @@ public class RollerGravity : MonoBehaviour
     {
         if (gravityDirection == GravityDirection.Down)
         {
-            Physics2D.gravity = new Vector2(0, -9.8f);
+            rb.gravityScale = 1;
+            //Physics2D.gravity = new Vector2(0, -9.8f);
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 gravityDirection = GravityDirection.Up;
@@ -27,7 +32,8 @@ public class RollerGravity : MonoBehaviour
         }
         else
         {
-            Physics2D.gravity = new Vector2(0, 9.8f);
+            rb.gravityScale = -1;
+            //Physics2D.gravity = new Vector2(0, 9.8f);
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 gravityDirection = GravityDirection.Down;
